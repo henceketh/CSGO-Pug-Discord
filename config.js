@@ -5,7 +5,7 @@ module.exports = {
     mapDisplayNames: {
         'de_train': 'Train 🚂',
         'de_dust2': 'Dust II 🏜️',
-        'de_shortnuke': 'Nuke (Короткая) ☢️',
-        'de_shortdust': 'Dust (Короткая) 🏙️'
+        'de_shortnuke': 'Nuke (Short) ☢️',
+        'de_shortdust': 'Dust (Short) 🏙️'
     }
 };
