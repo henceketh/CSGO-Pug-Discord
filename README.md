@@ -1,60 +1,102 @@
-# Discord CS:GO Matchmaking Bot
+# Discord CS:GO Matchmaking Bot (Nightly Build)
 
-## Features
+This is the development branch of the Discord CS:GO Matchmaking Bot, containing the latest features and improvements that have not yet been released to the stable branch. Please be aware that this version may contain experimental features and could be less stable than the release version.
 
-- **Multiple Game Modes**: Support for 1v1, 2v2, 3v3, and 5v5 matches
-- **Automated Lobbies**: Creates category with queue channel and voice lobby
-- **Ready Check System**: Ensures all players are ready before starting
-- **Team Selection**: 
-  - Random captains selection
-  - Captain-based player drafting
-  - Automatic random assignment if time expires
-- **Map Veto Process**: 
-  - Captains take turns banning maps
-  - CS:GO map pool (de_train, de_dust2, de_shortnuke, de_shortdust)
-  - Final map selected automatically
-- **Team Management**:
-  - Creates separate voice channels for each team
-  - Automatically moves players to their team channels
-- **Continuous Games**: Creates new game lobbies after matches start
-- **Persistent State**: Stores games in MongoDB and recovers on restart
+## Development Status
 
-## Setup
+This nightly build is under active development. Features may be incomplete, behavior may change without notice, and there could be performance or stability issues. We recommend using the stable branch for production environments.
 
-1. Clone the repository
+## Experimental Features
+
+The nightly branch includes the following experimental features that are not yet available in the stable release:
+
+- **Enhanced Map Pool Management**: Ability to customize the map pool per game mode
+- **Match History**: Tracking of completed matches with basic statistics
+- **Team Balancing**: Experimental algorithm for more balanced team selection
+- **Advanced Ready Check**: More robust ready check system with additional time controls
+- **Localization Framework**: Foundations for supporting multiple languages
+- **Voice Channel Controls**: Advanced permissions and controls for team voice channels
+
+## Installation
+
+### Standard Installation
+
+1. Clone the repository, specifying the nightly branch:
+   ```
+   git clone -b nightly https://github.com/henceketh/discord-csgo-matchmaking-bot.git
+   cd discord-csgo-matchmaking-bot
+   ```
+
 2. Install dependencies:
    ```
    npm install
    ```
+
 3. Create a `.env` file with:
    ```
    DISCORD_TOKEN=your_discord_bot_token
    CLIENT_ID=your_discord_application_id
    MONGODB_URI=your_mongodb_connection_string
    ```
+
 4. Register commands:
    ```
    node deploy-commands.js
    ```
+
 5. Start the bot:
    ```
    node index.js
    ```
 
-## Usage
+### Docker Installation (Nightly)
 
-### Creating a Game
+The nightly branch includes improved Docker support:
 
-Use the `/create_game` command with the following options:
-- `mode`: Select from 1v1, 2v2, 3v3, or 5v5
-- `category` (optional): ID of existing category to create a new game there
+1. Clone the repository, specifying the nightly branch:
+   ```
+   git clone -b nightly https://github.com/henceketh/discord-csgo-matchmaking-bot.git
+   cd discord-csgo-matchmaking-bot
+   ```
 
-### Game Flow
+2. Create a `.env` file as described above, and add:
+   ```
+   MONGO_USER=your_mongodb_username
+   MONGO_PASSWORD=your_mongodb_password
+   ```
 
-1. Players join the Lobby voice channel
-2. When enough players join, a ready check begins
-3. After all players confirm, captains are selected randomly
-4. Captains take turns picking players for their teams
-5. Captains take turns banning maps until only one remains
-6. Team voice channels are created and players are moved
-7. A new game lobby is automatically created for the next match
+3. Build and start the containers:
+   ```
+   docker-compose up -d
+   ```
+
+## Reporting Issues
+
+When reporting issues with the nightly build, please:
+
+1. Check if the issue already exists in the Issue tracker
+2. Create a new issue with "[Nightly]" at the beginning of the title
+3. Include the specific nightly build version or commit hash
+4. Provide detailed reproduction steps
+5. Include logs, error messages, and context
+
+## Contributing to Development
+
+Contributions to the nightly branch are welcome. Please follow these guidelines:
+
+1. Fork the repository and create your branch from `nightly`
+2. Implement your changes following the project's coding standards
+3. Add or update tests for your changes
+4. Update documentation to reflect your changes
+5. Submit a pull request to the `nightly` branch
+
+## Switching Between Branches
+
+To switch between nightly and stable branches:
+
+```
+git checkout main    # For stable version
+git checkout nightly # For development version
+```
+
+Remember to run `npm install` after switching branches to ensure you have the correct dependencies.
