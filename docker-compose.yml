@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    restart: always
+    env_file: .env
+    depends_on:
+      - mongodb
+    networks:
+      - bot-network
+
+  mongodb:
+    image: mongo:6.0
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - bot-network
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
+
+networks:
+  bot-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
